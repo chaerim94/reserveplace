@@ -13,7 +13,7 @@
                         class="border-color"
                     >
                     </v-list-item-avatar>
-                    <h1 class="align-self-center ml-3">Accommodation</h1>
+                    <h1 class="align-self-center ml-3">Log</h1>
                     <div class="secondary-text-color" style="margin-left:30px;"></div>
                 </v-list-item>
             </v-row>
@@ -27,7 +27,7 @@
                         hide-overlay
                         transition="dialog-bottom-transition"
                 >
-                    <PlaceAccommodation :offline="offline" class="video-card" :isNew="true" :editMode="true" v-model="newValue" 
+                    <NotificationLog :offline="offline" class="video-card" :isNew="true" :editMode="true" v-model="newValue" 
                             @add="append" v-if="tick"/>
 
                     <v-btn
@@ -66,7 +66,7 @@
                                 color="primary"
                                 style="font-weight:500; font-size:20px; padding:15px; border:solid 2px; max-width:250px; overflow:hidden"
                             >
-                                Accommodation 등록
+                                Log 등록
                             </v-btn>
                         </v-card-actions>
                     </v-card>
@@ -74,7 +74,7 @@
             </div>
         </v-col>
         <v-row>
-            <PlaceAccommodation :offline="offline" class="video-card" v-for="(value, index) in values" v-model="values[index]" v-bind:key="index" @delete="remove"/>
+            <NotificationLog :offline="offline" class="video-card" v-for="(value, index) in values" v-model="values[index]" v-bind:key="index" @delete="remove"/>
         </v-row>
     </div>
 </template>
@@ -82,12 +82,12 @@
 <script>
 
     const axios = require('axios').default;
-    import PlaceAccommodation from './../PlaceAccommodation.vue';
+    import NotificationLog from './../NotificationLog.vue';
 
     export default {
-        name: 'PlaceAccommodationManager',
+        name: 'NotificationLogManager',
         components: {
-            PlaceAccommodation,
+            NotificationLog,
         },
         props: {
             offline: Boolean
@@ -105,17 +105,12 @@
                 return;
             } 
 
-            var temp = await axios.get(axios.fixUrl('/accommodations'))
-            me.values = temp.data._embedded.accommodations;
+            var temp = await axios.get(axios.fixUrl('/logs'))
+            me.values = temp.data._embedded.logs;
             
             me.newValue = {
-                'orderId': 0,
-                'placeNm': '',
-                'placeId': '',
-                'status': '',
+                'logId': 0,
                 'usrId': '',
-                'strDt': '2024-02-20',
-                'endDt': '2024-02-20',
             }
         },
         methods:{

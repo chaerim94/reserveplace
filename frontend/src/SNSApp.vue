@@ -72,13 +72,13 @@
 
                     <v-list-item
                         class="px-2"
-                        key="notificationHistories"
-                        to="/notifications/notificationHistories"
+                        key="logs"
+                        to="/notifications/logs"
                         @click="changeUrl()"
                         color="primary"
                         style="font-weight:700;"
                     >
-                        NotificationHistory
+                        Log
                     </v-list-item>
 
 
@@ -182,10 +182,10 @@ export default {
                 ImageUrl: '',
             },
             { 
-                title: 'NotificationHistory', 
+                title: 'Log', 
                 description: '', 
-                key: 'notificationHistories', 
-                route: '/notifications/notificationHistories',
+                key: 'logs', 
+                route: '/notifications/logs',
                 ImageUrl: '',
             },
             

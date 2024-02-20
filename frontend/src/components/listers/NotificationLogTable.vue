@@ -31,7 +31,7 @@
                         </v-fab-transition>
                     </template>
 
-                    <PlaceAccommodation :offline="offline" class="video-card" :isNew="true" :editMode="true" v-model="newValue" @add="append" v-if="tick"/>
+                    <NotificationLog :offline="offline" class="video-card" :isNew="true" :editMode="true" v-model="newValue" @add="append" v-if="tick"/>
                 
                     <v-btn
                             style="postition:absolute; top:2%; right:2%"
@@ -50,12 +50,12 @@
 
 <script>
     const axios = require('axios').default;
-    import PlaceAccommodation from './../PlaceAccommodation.vue';
+    import NotificationLog from './../NotificationLog.vue';
 
     export default {
-        name: 'PlaceAccommodationManager',
+        name: 'NotificationLogManager',
         components: {
-            PlaceAccommodation,
+            NotificationLog,
         },
         props: {
             offline: Boolean,
@@ -66,15 +66,10 @@
             values: [],
             headers: 
                 [
-                    { text: "orderId", value: "orderId" },
-                    { text: "placeNm", value: "placeNm" },
-                    { text: "placeId", value: "placeId" },
-                    { text: "status", value: "status" },
+                    { text: "logId", value: "logId" },
                     { text: "usrId", value: "usrId" },
-                    { text: "strDt", value: "strDt" },
-                    { text: "endDt", value: "endDt" },
                 ],
-            accommodation : [],
+            log : [],
             newValue: {},
             tick : true,
             openDialog : false,
@@ -85,18 +80,13 @@
                 return;
             }
 
-            var temp = await axios.get(axios.fixUrl('/accommodations'))
-            temp.data._embedded.accommodations.map(obj => obj.id=obj._links.self.href.split("/")[obj._links.self.href.split("/").length - 1])
-            this.values = temp.data._embedded.accommodations;
+            var temp = await axios.get(axios.fixUrl('/logs'))
+            temp.data._embedded.logs.map(obj => obj.id=obj._links.self.href.split("/")[obj._links.self.href.split("/").length - 1])
+            this.values = temp.data._embedded.logs;
 
             this.newValue = {
-                'orderId': 0,
-                'placeNm': '',
-                'placeId': '',
-                'status': '',
+                'logId': 0,
                 'usrId': '',
-                'strDt': '2024-02-20',
-                'endDt': '2024-02-20',
             }
         },
         methods: {

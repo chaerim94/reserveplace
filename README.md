@@ -47,7 +47,7 @@ mvn spring-boot:run
 ```
 - notification
 ```
- http :8088/notificationHistories notiId="notiId" orderId="orderId" usrId="usrId" msg="msg" sendDt="sendDt" 
+ http :8088/logs logId="logId" usrId="usrId" 
 ```
 
 

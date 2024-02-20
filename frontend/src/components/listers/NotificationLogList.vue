@@ -1,6 +1,6 @@
 <template>
     <div>
-    <h1>Accommodation</h1>
+    <h1>Log</h1>
         <v-row>
             <v-card
                 class="mx-auto"
@@ -26,7 +26,7 @@
                         color="primary"
                         style="font-weight:500; font-size:20px; padding:15px; border:solid 2px; max-width:250px; overflow:hidden"
                     >
-                        Accommodation 등록
+                        Log 등록
                     </v-btn>
                 </v-card-actions>
             </v-card>
@@ -42,21 +42,11 @@
                         <v-list-item-title style="margin-bottom:10px;">
                             
                             
-                            
-                            
-                            
-                            
-                            
                         </v-list-item-title>
 
                         <v-list-item-subtitle style="font-size:25px; font-weight:700;">
-                            [ OrderId :  {{data.orderId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            [ PlaceNm :  {{data.placeNm }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            [ PlaceId :  {{data.placeId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            [ Status :  {{data.status }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            [ LogId :  {{data.logId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ UsrId :  {{data.usrId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            [ StrDt :  {{data.strDt }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            [ EndDt :  {{data.endDt }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </v-list-item-subtitle>
 
                     </v-list-item-content>
@@ -76,7 +66,7 @@
                         transition="dialog-bottom-transition"
                 >
 
-                    <PlaceAccommodation :offline="offline" class="video-card" :isNew="true" :editMode="true" v-model="newValue" @add="append" v-if="tick"/>
+                    <NotificationLog :offline="offline" class="video-card" :isNew="true" :editMode="true" v-model="newValue" @add="append" v-if="tick"/>
                 
                     <v-btn
                             style="postition:absolute; top:2%; right:2%"
@@ -95,12 +85,12 @@
 
 <script>
     const axios = require('axios').default;
-    import PlaceAccommodation from './../PlaceAccommodation.vue';
+    import NotificationLog from './../NotificationLog.vue';
 
     export default {
-        name: 'PlaceAccommodationManager',
+        name: 'NotificationLogManager',
         components: {
-            PlaceAccommodation,
+            NotificationLog,
         },
         props: {
             offline: Boolean,
@@ -119,18 +109,13 @@
                 return;
             } 
 
-            var temp = await axios.get(axios.fixUrl('/accommodations'))
-            temp.data._embedded.accommodations.map(obj => obj.id=obj._links.self.href.split("/")[obj._links.self.href.split("/").length - 1])
-            this.values = temp.data._embedded.accommodations;
+            var temp = await axios.get(axios.fixUrl('/logs'))
+            temp.data._embedded.logs.map(obj => obj.id=obj._links.self.href.split("/")[obj._links.self.href.split("/").length - 1])
+            this.values = temp.data._embedded.logs;
             
             this.newValue = {
-                'orderId': 0,
-                'placeNm': '',
-                'placeId': '',
-                'status': '',
+                'logId': 0,
                 'usrId': '',
-                'strDt': '2024-02-20',
-                'endDt': '2024-02-20',
             }
         },
         methods: {

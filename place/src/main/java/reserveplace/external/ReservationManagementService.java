@@ -16,12 +16,4 @@ public interface ReservationManagementService {
     public void reservationInform(
         @RequestBody ReservationManagement reservationManagement
     );
-
-    @RequestMapping(
-        method = RequestMethod.PUT,
-        path = "/reservationManagements"
-    )
-    public void reservationCancelProcessing(
-        @RequestBody ReservationManagement reservationManagement
-    );
 }

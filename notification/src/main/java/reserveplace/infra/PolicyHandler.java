@@ -18,9 +18,27 @@ import reserveplace.domain.*;
 public class PolicyHandler {
 
     @Autowired
-    NotificationHistoryRepository notificationHistoryRepository;
+    LogRepository logRepository;
 
     @StreamListener(KafkaProcessor.INPUT)
     public void whatever(@Payload String eventString) {}
+
+    @StreamListener(
+        value = KafkaProcessor.INPUT,
+        condition = "headers['type']=='ReservationStatusChanged'"
+    )
+    public void wheneverReservationStatusChanged_NotifedUser(
+        @Payload ReservationStatusChanged reservationStatusChanged
+    ) {
+        ReservationStatusChanged event = reservationStatusChanged;
+        System.out.println(
+            "\n\n##### listener NotifedUser : " +
+            reservationStatusChanged +
+            "\n\n"
+        );
+
+        // Sample Logic //
+        Log.notifedUser(event);
+    }
 }
 //>>> Clean Arch / Inbound Adaptor

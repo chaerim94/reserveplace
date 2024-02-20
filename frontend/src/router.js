@@ -14,8 +14,8 @@ import PaymentPaymentHistoryDetail from "./components/listers/PaymentPaymentHist
 import ManagementReservationManagementManager from "./components/listers/ManagementReservationManagementCards"
 import ManagementReservationManagementDetail from "./components/listers/ManagementReservationManagementDetail"
 
-import NotificationNotificationHistoryManager from "./components/listers/NotificationNotificationHistoryCards"
-import NotificationNotificationHistoryDetail from "./components/listers/NotificationNotificationHistoryDetail"
+import NotificationLogManager from "./components/listers/NotificationLogCards"
+import NotificationLogDetail from "./components/listers/NotificationLogDetail"
 
 
 export default new Router({
@@ -56,14 +56,14 @@ export default new Router({
             },
 
             {
-                path: '/notifications/notificationHistories',
-                name: 'NotificationNotificationHistoryManager',
-                component: NotificationNotificationHistoryManager
+                path: '/notifications/logs',
+                name: 'NotificationLogManager',
+                component: NotificationLogManager
             },
             {
-                path: '/notifications/notificationHistories/:id',
-                name: 'NotificationNotificationHistoryDetail',
-                component: NotificationNotificationHistoryDetail
+                path: '/notifications/logs/:id',
+                name: 'NotificationLogDetail',
+                component: NotificationLogDetail
             },
 
 

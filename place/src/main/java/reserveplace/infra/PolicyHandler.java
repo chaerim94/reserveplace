@@ -84,52 +84,5 @@ public class PolicyHandler {
         // Sample Logic //
 
     }
-
-    @StreamListener(
-        value = KafkaProcessor.INPUT,
-        condition = "headers['type']=='ReservationCanceled'"
-    )
-    public void wheneverReservationCanceled_ReserveSaga(
-        @Payload ReservationCanceled reservationCanceled
-    ) {
-        ReservationCanceled event = reservationCanceled;
-        System.out.println(
-            "\n\n##### listener ReserveSaga : " + reservationCanceled + "\n\n"
-        );
-        // Sample Logic //
-
-    }
-
-    @StreamListener(
-        value = KafkaProcessor.INPUT,
-        condition = "headers['type']=='PaymentCancelApproved'"
-    )
-    public void wheneverPaymentCancelApproved_ReserveSaga(
-        @Payload PaymentCancelApproved paymentCancelApproved
-    ) {
-        PaymentCancelApproved event = paymentCancelApproved;
-        System.out.println(
-            "\n\n##### listener ReserveSaga : " + paymentCancelApproved + "\n\n"
-        );
-        // Sample Logic //
-
-    }
-
-    @StreamListener(
-        value = KafkaProcessor.INPUT,
-        condition = "headers['type']=='ReservationCancelConfirmed'"
-    )
-    public void wheneverReservationCancelConfirmed_ReserveSaga(
-        @Payload ReservationCancelConfirmed reservationCancelConfirmed
-    ) {
-        ReservationCancelConfirmed event = reservationCancelConfirmed;
-        System.out.println(
-            "\n\n##### listener ReserveSaga : " +
-            reservationCancelConfirmed +
-            "\n\n"
-        );
-        // Sample Logic //
-
-    }
 }
 //>>> Clean Arch / Inbound Adaptor
